@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "calcrete"
+version = "0.0.1"
+description = "Calcrete is a python library for the calculation of strength for reinforced concrete sections and elements."
+authors = ["Nicolás Moreno <nicolasmorenoy@gmail.com>"]
+license = "GNU General Public License v2.0"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+matplotlib = "^3.9.0"
+shapely = "^2.0.5"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
