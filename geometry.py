@@ -143,6 +143,10 @@ class Circular(Geometry):
             Polygon: A Shapely Polygon object of the circle.
         """
         return Point(0, 0).buffer(self.radius)
+    
+    @property
+    def diameter(self) -> float:
+        return self.radius*2
 
     @property
     def area(self) -> float:
