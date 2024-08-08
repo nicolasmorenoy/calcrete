@@ -53,7 +53,7 @@ class Rectangular(Geometry):
         List of vertices for the rectangle.
 
         Returns:
-            List[Tuple[float, float]]: A list of tuples representing the vertices.
+            list[tuple[float, float]]: A list of tuples representing the vertices.
         """
         return [
             (0, 0),  # Bottom-left corner
@@ -115,3 +115,92 @@ class Rectangular(Geometry):
             "Perimeter": self.perimeter,
             "Centroid": (self.centroid.x, self.centroid.y)
         }
+
+
+class Circular(Geometry):
+    """
+    Class representing a circular geometric shape.
+
+    Attributes:
+        radius (float): The radius of the circle.
+    """
+    def __init__(self, radius: float) -> None:
+        """
+        Initializes a Circular geometry with a specified radius.
+
+        Parameters:
+            radius (float): The radius of the circle.
+        """
+        super().__init__(GeometryType.CIRCULAR)
+        self.radius = radius
+
+    @property
+    def shape(self) -> Polygon:
+        """
+        Polygon object representing the circle using buffer.
+
+        Returns:
+            Polygon: A Shapely Polygon object of the circle.
+        """
+        return Point(0, 0).buffer(self.radius)
+
+    @property
+    def area(self) -> float:
+        """
+        Calculates the area of the circle.
+
+        Returns:
+            float: The area of the circle.
+        """
+        return self.shape.area
+
+    @property
+    def perimeter(self) -> float:
+        """
+        Calculates the circumference of the circle.
+
+        Returns:
+            float: The circumference of the circle.
+        """
+        return self.shape.length
+
+    @property
+    def centroid(self) -> Point:
+        """
+        Calculates the centroid of the circle.
+
+        Returns:
+            Point: A Shapely Point object representing the centroid.
+        """
+        return self.shape.centroid
+
+    def properties_dict(self) -> dict:
+        """
+        Returns a dictionary of all geometric properties of the circle.
+
+        Returns:
+            dict: A dictionary containing the area, perimeter, and centroid.
+        """
+        return {
+            "Area": self.area,
+            "Perimeter": self.perimeter,
+            "Centroid": (self.centroid.x, self.centroid.y)
+        }
+
+
+# Example usage
+if __name__ == "__main__":
+    rectangle = Rectangular(length_1=4, length_2=3)
+    print("Rectangle Properties:")
+    print(f"Vertices: {rectangle.vertices}")
+    print(f"Area: {rectangle.area}")
+    print(f"Perimeter: {rectangle.perimeter}")
+    print(f"Centroid: {rectangle.centroid}")
+    print(f"Properties: {rectangle.properties_dict()}")
+
+    circle = Circular(radius=5)
+    print("\nCircle Properties:")
+    print(f"Area: {circle.area}")
+    print(f"Perimeter: {circle.perimeter}")
+    print(f"Centroid: {circle.centroid}")
+    print(f"Properties: {circle.properties_dict()}")
